@@ -1,0 +1,252 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+    background: #1a1a1a;
+    color: #fff;
+    flex-direction: column;
+    padding: 10px;
+}
+
+h1 {
+    font-family: "Georgia", "Times New Roman", serif;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+h1 img {
+    vertical-align: middle;
+    height: 2em;
+}
+
+#status {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    background: #2c3e50;
+    min-width: 250px;
+    text-align: center;
+}
+
+#status.idle {
+    background: #34495e;
+}
+
+#status.recording {
+    background: #c0392b;
+    animation: pulse 1.5s infinite;
+}
+
+#status.stopped {
+    background: #27ae60;
+}
+
+#status.error {
+    background: #e67e22;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+#timer {
+    font-size: 28px;
+    margin: 5px 0;
+    font-family: monospace;
+    min-height: 35px;
+}
+
+#feedback {
+    font-size: 14px;
+    margin: 5px 0;
+    padding: 8px 15px;
+    border-radius: 4px;
+    background: #34495e;
+    min-width: 250px;
+    text-align: center;
+    min-height: 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+#feedback.show {
+    opacity: 1;
+}
+
+.controls {
+    margin: 0;
+    padding: 15px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: transparent;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+button {
+    font-size: 32px;
+    padding: 25px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition:
+        transform 0.1s,
+        opacity 0.3s;
+}
+
+button:hover:not(:disabled) {
+    transform: scale(1.1);
+}
+
+button:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+#record {
+    background: #e74c3c;
+}
+
+#stop {
+    background: #95a5a6;
+}
+
+#play {
+    background: #3498db;
+}
+
+#download {
+    background: #27ae60;
+    font-size: 18px;
+    padding: 15px 30px;
+    border-radius: 6px;
+}
+
+#upload {
+    background: #3498db;
+}
+
+#scan {
+    background: #9b59b6;
+}
+
+#stateInfo {
+    margin-top: 10px;
+    padding: 10px;
+    background: #2c3e50;
+    border-radius: 6px;
+    font-size: 12px;
+    min-width: 250px;
+}
+
+#stateInfo div {
+    margin: 3px 0;
+}
+
+.visualizer {
+    margin: 20px 0;
+    padding: 15px;
+    background: #2c3e50;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.display-mode-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.display-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    background: #34495e;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.display-btn:hover {
+    background: #3498db;
+}
+
+.display-btn.active {
+    background: #3498db;
+    font-weight: bold;
+}
+
+#frequencyBandsView,
+#spectralView {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+}
+
+#waveform,
+#frequency,
+#lowFreq,
+#midFreq,
+#highFreq {
+    border: 2px solid #34495e;
+    border-radius: 4px;
+    background: #1a1a1a;
+    max-width: 100%;
+    height: auto;
+}
+
+#volumeLevel {
+    font-size: 16px;
+    font-family: monospace;
+    color: #00ff00;
+    padding: 5px 10px;
+    background: #1a1a1a;
+    border-radius: 4px;
+    min-width: 150px;
+    text-align: center;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 800px;
+    padding: 10px;
+}
+
+.progress-container input[type="range"] {
+    flex: 1;
+}
+
+.progress-container span {
+    font-family: monospace;
+    color: #fff;
+    min-width: 40px;
+}
