@@ -13,11 +13,11 @@ export class AudioRecorder {
     this.analyser = null;
     this.startTime = null;
     this.timerInterval = null;
-    this.onDataAvailable = null;
     this.onStop = null;
     this.onError = null;
     this.onTimer = null;
     this.mimeType = null;
+    this.silentAudio = null; // Keep-awake audio element
   }
 
   async start() {
@@ -56,9 +56,6 @@ export class AudioRecorder {
 
     this.mediaRecorder.ondataavailable = (e) => {
       this.chunks.push(e.data);
-      if (this.onDataAvailable) {
-        this.onDataAvailable(this.chunks);
-      }
     };
 
     this.mediaRecorder.onstop = () => {
@@ -92,6 +89,16 @@ export class AudioRecorder {
       }
     }, TIMER_UPDATE_INTERVAL_MS);
 
+    // Play silent audio to prevent phone sleep (Android Chrome workaround)
+    this.silentAudio = new Audio(
+      "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=",
+    );
+    this.silentAudio.loop = true;
+    this.silentAudio.volume = 0.01; // Very quiet but not 0
+    this.silentAudio.play().catch((err) => {
+      console.warn("Could not play keep-awake audio:", err);
+    });
+
     return this.analyser;
   }
 
@@ -110,21 +117,16 @@ export class AudioRecorder {
         this.audioContext = null;
         this.analyser = null;
       }
+
+      // Stop keep-awake audio
+      if (this.silentAudio) {
+        this.silentAudio.pause();
+        this.silentAudio = null;
+      }
     }
   }
 
   isRecording() {
     return this.mediaRecorder && this.mediaRecorder.state !== "inactive";
-  }
-
-  getState() {
-    return {
-      recorderState: this.mediaRecorder
-        ? this.mediaRecorder.state
-        : "Not initialized",
-      streamActive: this.stream && this.stream.active,
-      chunksCount: this.chunks.length,
-      totalBytes: this.chunks.reduce((acc, c) => acc + c.size, 0),
-    };
   }
 }
