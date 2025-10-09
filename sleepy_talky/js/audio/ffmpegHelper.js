@@ -23,8 +23,10 @@ export async function initFFmpeg() {
     try {
       ffmpeg = new FFmpeg();
 
-      // Use relative path to work both locally and on GitHub Pages
-      const baseURL = "./libs/ffmpeg";
+      // Load core files from CDN (saves ~33MB from local hosting)
+      // toBlobURL bypasses CORS restrictions by converting to blob URLs
+      const baseURL =
+        "https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.10/dist/umd";
 
       // onProgress?.("Loading FFmpeg WASM (~30MB, first time only)...");
 
@@ -68,16 +70,14 @@ export async function initFFmpeg() {
  * @param {Blob} audioBlob - Source audio file (any format)
  * @param {number} startSeconds - Start time in seconds
  * @param {number} durationSeconds - Duration to extract in seconds
- * @param {Function} onProgress - Optional progress callback
  * @returns {Promise<Blob>} WAV audio blob of the extracted chunk
  */
 export async function extractAudioChunk(
   audioBlob,
   startSeconds,
   durationSeconds,
-  onProgress = null,
 ) {
-  const ffmpeg = await initFFmpeg(onProgress);
+  const ffmpeg = await initFFmpeg();
 
   // Determine input format from blob type
   const mimeType = audioBlob.type || "audio/mp4";
@@ -140,8 +140,8 @@ export async function extractAudioChunk(
  * @param {Blob} audioBlob - Source audio file
  * @returns {Promise<number>} Duration in seconds
  */
-export async function getAudioDuration(audioBlob, onProgress = null) {
-  const ffmpeg = await initFFmpeg(onProgress);
+export async function getAudioDuration(audioBlob) {
+  const ffmpeg = await initFFmpeg();
 
   const mimeType = audioBlob.type || "audio/mp4";
   const extension = mimeType.includes("webm")
