@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Terrain Graph Editor</title>
+        <script src="https://cdn.jsdelivr.net/npm/drawflow@0.0.60/dist/drawflow.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/drawflow@0.0.60/dist/drawflow.min.css" />
+        <link rel="stylesheet" href="src/styles/main.css" />
+        <link rel="stylesheet" href="src/styles/nodes.css" />
+        <link rel="stylesheet" href="src/styles/ports.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="editor-area">
+                <div class="editor-toolbar">
+                    <span class="toolbar-title">Terrain Graph Editor</span>
+                    <button class="add-node-btn" onclick="addRGBNode()">+ RGB Node</button>
+                    <button class="add-node-btn" onclick="addRGBANode()">+ RGBA Node</button>
+                    <button class="add-node-btn" style="background: #d32f2f" onclick="clearSelection()">
+                        Clear Connections
+                    </button>
+                </div>
+                <div id="drawflow"></div>
+            </div>
+
+            <div class="preview-area">
+                <div class="preview-title">Preview Area</div>
+                <div class="preview-canvas">
+                    <span>Select a node to preview</span>
+                </div>
+                <div class="info-section">
+                    <p><strong>Library:</strong> Drawflow v0.0.60</p>
+                    <p><strong>Theme:</strong> Purple with Green Selection</p>
+                    <p><strong>Instructions:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 8px">
+                        <li>Click port once to start connection, click another to complete</li>
+                        <li>Upload images via "Upload Image" button in nodes</li>
+                        <li>Hover over ports to see their names</li>
+                        <li>Green port groups = enabled, Red = disabled</li>
+                        <li>Drag nodes to move them</li>
+                        <li>Right-click node to delete it</li>
+                        <li>Mouse wheel to zoom</li>
+                    </ul>
+                    <p style="margin-top: 12px"><strong>Features:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 8px">
+                        <li>Stacked port groups with tooltips</li>
+                        <li>File upload with image preview</li>
+                        <li>Click-to-connect port system</li>
+                        <li>RGB and RGBA node types</li>
+                        <li>Channel-based operations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="src/js/app.js"></script>
+    </body>
+</html>

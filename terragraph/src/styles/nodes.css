@@ -1,0 +1,130 @@
+/* Node Styling */
+
+.drawflow .drawflow-node {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    border: 2px solid #9c27b0 !important;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(156, 39, 176, 0.3);
+    color: #d4d4d4;
+    min-width: 250px;
+    max-width: 350px;
+}
+
+.drawflow .drawflow-node.selected {
+    border-color: #ba68c8 !important;
+    box-shadow: 0 8px 20px rgba(156, 39, 176, 0.5);
+}
+
+/* Green outline for selected elements */
+.drawflow .selected,
+.drawflow-node.selected,
+.connection.selected {
+    background: transparent !important;
+    outline: 3px solid #4caf50 !important;
+    outline-offset: 2px;
+}
+
+.drawflow .connection.selected .main-path {
+    stroke: #4caf50 !important;
+    stroke-width: 4px !important;
+    filter: drop-shadow(0 0 6px rgba(76, 175, 80, 0.6));
+}
+
+.drawflow .drawflow-node .title-box {
+    background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%) !important;
+    color: white !important;
+    padding: 10px 14px;
+    font-weight: 600;
+    border-radius: 10px 10px 0 0;
+}
+
+.drawflow .connection .main-path {
+    stroke: #9c27b0 !important;
+    stroke-width: 3px !important;
+    filter: drop-shadow(0 0 4px rgba(156, 39, 176, 0.5));
+}
+
+.drawflow .connection .main-path:hover {
+    stroke: #ba68c8 !important;
+}
+
+.drawflow .connection .point {
+    stroke: #9c27b0 !important;
+    fill: #9c27b0 !important;
+}
+
+.node-preview {
+    width: 100%;
+    min-height: 80px;
+    max-height: 150px;
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 11px;
+    border-bottom: 1px solid #333;
+    overflow: hidden;
+    position: relative;
+}
+
+.node-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.node-content {
+    padding: 12px;
+}
+
+.node-control {
+    margin: 10px 0;
+}
+
+.node-control label {
+    display: block;
+    font-size: 11px;
+    color: #aaa;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.node-control select,
+.node-control button,
+.node-control input[type="file"] {
+    width: 100%;
+    padding: 7px 10px;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    color: #d4d4d4;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.node-control button:hover {
+    background: #333;
+    border-color: #9c27b0;
+}
+
+.divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #444, transparent);
+    margin: 12px 0;
+}
+
+/* Hide default Drawflow ports */
+.drawflow .drawflow-node .inputs,
+.drawflow .drawflow-node .outputs {
+    display: none !important;
+}
+
+.drawflow .drawflow-node .input,
+.drawflow .drawflow-node .output {
+    display: none !important;
+}
